@@ -29,6 +29,7 @@ defmodule FoodTruckApi.MixProject do
       {:csv, "~> 3.0"},
       {:absinthe_plug, "~> 1.5"},
       {:plug_cowboy, "~> 2.6"},
+      {:jason, "~> 1.4"}
     ]
   end
 end

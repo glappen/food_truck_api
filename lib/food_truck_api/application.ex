@@ -8,6 +8,7 @@ defmodule FoodTruckApi.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      Plug.Cowboy.child_spec(scheme: :http, plug: FoodTruckApi.Router, options: [port: 4000]),
       FoodTruck.Repo
     ]
 
