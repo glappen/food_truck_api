@@ -1,4 +1,7 @@
 defmodule FoodTruckApi.Schema do
+  @moduledoc """
+  Absinthe GraphQL Schema definition
+  """
   use Absinthe.Schema
 
   alias FoodTruckApi.Resolve

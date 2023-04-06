@@ -6,6 +6,7 @@ defmodule FoodTruck.Directory do
   alias FoodTruck.Repo
   alias FoodTruck.Schemas.FoodTruck
 
+  @spec create_food_truck(map()) :: {:ok, FoodTruck.t()} | {:error, atom()}
   def create_food_truck(attrs \\ %{}) do
     %FoodTruck{}
     |> FoodTruck.changeset(attrs)
@@ -14,6 +15,6 @@ defmodule FoodTruck.Directory do
 
   @spec list_food_trucks(keyword()) :: [FoodTruck]
   def list_food_trucks(filter \\ []) do
-    Repo.all(FoodTruck)
+    Repo.get_by(FoodTruck, filter)
   end
 end
