@@ -18,7 +18,8 @@ defmodule FoodTruckApi.Schema do
 
   query do
     field :food_trucks, list_of(:food_truck) do
-      resolve(&Resolve.food_trucks/3)
+      arg(:food_items, :string)
+      resolve(&Resolve.search_food_trucks/3)
     end
   end
 end

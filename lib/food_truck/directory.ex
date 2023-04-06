@@ -3,6 +3,8 @@ defmodule FoodTruck.Directory do
   Directory context for managing and querying food truck data
   """
 
+  import Ecto.Query
+
   alias FoodTruck.Repo
   alias FoodTruck.Schemas.FoodTruck
 
@@ -13,8 +15,13 @@ defmodule FoodTruck.Directory do
     |> Repo.insert()
   end
 
-  @spec list_food_trucks(keyword()) :: [FoodTruck]
-  def list_food_trucks(filter \\ []) do
-    Repo.get_by(FoodTruck, filter)
+  @spec search_food_trucks(map()) :: [FoodTruck]
+  def search_food_trucks(%{food_items: food_items}) do
+    match = "%#{food_items}%"
+    Repo.all(from(ft in FoodTruck, where: ilike(ft.food_items, ^match)))
+  end
+
+  def search_food_trucks(_) do
+    Repo.all(FoodTruck)
   end
 end
