@@ -4,13 +4,21 @@ defmodule FoodTruckApi.MixProject do
   def project do
     [
       app: :food_truck_api,
+      elixirc_paths: elixirc_paths(Mix.env()),
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      aliases: aliases(),
       dialyzer: [plt_add_apps: [:mix]]
     ]
   end
+
+  defp elixirc_paths(:test) do
+    ["lib", "test/support"]
+  end
+
+  defp elixirc_paths(_), do: ["lib"]
 
   # Run "mix help compile.app" to learn about applications.
   def application do
@@ -34,5 +42,16 @@ defmodule FoodTruckApi.MixProject do
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
+  end
+
+  defp aliases do
+    [
+      test: ["ecto.create --quiet", "ecto.migrate", &test_aux/1],
+    ]
+  end
+
+  defp test_aux(_) do
+    Mix.env(:test)
+    Mix.Task.run("test")
   end
 end

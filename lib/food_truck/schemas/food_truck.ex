@@ -2,7 +2,6 @@ defmodule FoodTruck.Schemas.FoodTruck do
   @moduledoc """
   Schema for food trucks in database
   """
-  alias Ecto.Changeset
 
   use Ecto.Schema
 
